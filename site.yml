@@ -1,11 +1,35 @@
 ---
 # This playbook deploys a simple standalone Tomcat 7 server.
 
-- hosts: tomcat-servers
+- name: Ansible playbook to configure docker containers with Tomcat7
+  hosts: localhost
   remote_user: root
-  become: yes
-  become_method: sudo
 
-  roles:
-    - selinux
-    - tomcat
+  vars:
+    - tomcat_port: 8080
+
+  tasks:
+    ###import template file and replace port number
+    - name: Configure Tomcat server
+      template: src=server.xml dest=/usr/share/tomcat/conf/
+
+    - name: Configure Tomcat Authentication
+      file: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
+
+    - name: Sets Tomcat Resource Utilization
+      file: src=tomcat7 dest=/etc/default/tomcat7
+
+    - name: Start Tomcat
+      service: name=tomcat state=started enabled=yes
+
+    - name: wait for tomcat to start
+      wait_for: port={{tomcat_port}}
+
+  ###restart tomcat service
+  #notify: "restart tomcat"
+
+  ###call restart for tomcat service
+  handlers:
+    - name: start tomcat
+      service: name=tomcat state=restarted
+      #listen: "start tomcat"
