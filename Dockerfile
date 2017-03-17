@@ -17,11 +17,11 @@ RUN git clone https://github.com/gautamvw/ansible-test.git /tmp/ansible
 #ENV PYTHONPATH /tmp/ansible/lib:$PYTHON_PATH
 
 ### add playbooks to the image. This might be a git repo instead
-#ADD playbooks/ /etc/ansible/
 #ADD inventory /etc/ansible/hosts
 #WORKDIR /etc/ansible
 
 ### Run ansible using the site.yml playbook 
+ADD playbooks/ /tmp/ansible/
 WORKDIR /tmp/ansible
 RUN ansible-playbook /tmp/ansible/site.yml -c local
 EXPOSE 22 8080
