@@ -6,7 +6,9 @@
   remote_user: root
 
   vars:
-    - tomcat_port: 8080
+    - tomcat_port: 8088
+    - admin_username: admin
+    - admin_password: test@123
     
   roles:
     - docker-tomcat7

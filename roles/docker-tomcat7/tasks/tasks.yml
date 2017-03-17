@@ -12,4 +12,4 @@
   service: name=tomcat7 state=started enabled=yes
 
 - name: wait for tomcat to start
-  wait_for: port={{tomcat_port}}
+  wait_for: port={{ tomcat_port }}
