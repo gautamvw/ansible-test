@@ -8,7 +8,8 @@ RUN apt-get -y update
 RUN apt-get install -y tomcat7 tomcat7-admin git ansible
 
 ### Clone repo
-RUN git clone https://gautamvw:3cc2bd2c4ad5a08fe393a28242607e76c4cdf97c@github.com/gautamvw/ansible-test.git /tmp/ansible
+#ARG CACHE_DATE=2016-01-01
+RUN git clone https://github.com/gautamvw/ansible-test.git /tmp/ansible
 
 ### Set variables for ansible
 #ENV PATH /tmp/ansible/bin:/sbin:/usr/sbin:/usr/bin
