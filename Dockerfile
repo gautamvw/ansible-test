@@ -2,7 +2,8 @@
 FROM gautamvw/ubuntu-ansible:ansible-tomcat
 
 ### Clone repo
-RUN git clone https://github.com/gautamvw/ansible-test.git /tmp/ansible
+#RUN git clone https://github.com/gautamvw/ansible-test.git /tmp/ansible
+RUN git clone -b dev/gautam/variables https://github.com/gautamvw/ansible-test.git /tmp/ansible
 
 ### Set variables for ansible
 #ENV PATH /tmp/ansible/bin:/sbin:/usr/sbin:/usr/bin
