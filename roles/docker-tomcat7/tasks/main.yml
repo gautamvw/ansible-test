@@ -1,0 +1,15 @@
+---
+- name: Configure Tomcat server
+  template: src=server.xml dest=/etc/tomcat7/
+
+- name: Configure Tomcat Authentication
+  template: src=tomcat-users.xml dest=/etc/tomcat7/
+
+- name: Sets Tomcat Resource Utilization
+  template: src=tomcat7 dest=/etc/default/tomcat7
+
+- name: Start Tomcat
+  service: name=tomcat7 state=restarted enabled=yes
+
+- name: wait for tomcat to start
+  wait_for: port={{ tomcat_port }}
